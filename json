@@ -1,0 +1,121 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "category": "Entertainment: Music",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "The &quot;K&quot; in &quot;K-Pop&quot; stands for which word?",
+      "correct_answer": "Korean",
+      "incorrect_answers": [
+        "Kenyan",
+        "Kazakhstan",
+        "Kuwaiti"
+      ]
+    },
+    {
+      "category": "Entertainment: Music",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which of these songs is NOT included in the Suicide Squad OST?",
+      "correct_answer": "Skies on Fire - AC/DC",
+      "incorrect_answers": [
+        "Heathens - Twenty One Pilots",
+        "Without Me - Eminem",
+        "Fortunate Son - Creedence Clearwater Revival"
+      ]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "In the video game &quot;Metal Gear Solid&quot;, what did Revolver Ocelot consider the greatest handgun ever made?",
+      "correct_answer": "Colt Single Action Army",
+      "incorrect_answers": [
+        "Colt Python",
+        "Colt M1892",
+        "Colt 1851 Navy Revolver"
+      ]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The names of Tom Nook&#039;s cousins in the Animal Crossing franchise are named &quot;Timmy&quot; and &quot;Jimmy&quot;.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    },
+    {
+      "category": "Vehicles",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "Which car tire manufacturer is famous for its &quot;Eagle&quot; brand of tires, and is the official tire supplier of NASCAR?",
+      "correct_answer": "Goodyear",
+      "incorrect_answers": [
+        "Pirelli",
+        "Bridgestone",
+        "Michelin"
+      ]
+    },
+    {
+      "category": "Politics",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What was the personal nickname of the 40th Governor of the US State Louisiana, Huey Long?",
+      "correct_answer": "The Kingfish",
+      "incorrect_answers": [
+        "The Champ",
+        "The Hoot Owl",
+        "The Oracle"
+      ]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Before the American colonies switched to the Gregorian calendar in 1752, on what date did their new year start?",
+      "correct_answer": "March 25th",
+      "incorrect_answers": [
+        "June 1st",
+        "September 25th",
+        "December 1st"
+      ]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What song is played during the ending credits of Guitar Hero: World Tour?",
+      "correct_answer": "Dream Theater - Pull Me Under",
+      "incorrect_answers": [
+        "King Crimson - 21st Century Schizoid Man",
+        "Dragonforce - Through The Fire &amp; The Flames",
+        "Lynyrd Skynyrd - Free Bird"
+      ]
+    },
+    {
+      "category": "Entertainment: Television",
+      "type": "multiple",
+      "difficulty": "medium",
+      "question": "What is the name of the inspector in the series &quot;On the Buses&quot;?",
+      "correct_answer": "Blakey",
+      "incorrect_answers": [
+        "Harper",
+        "Naily",
+        "Gally"
+      ]
+    },
+    {
+      "category": "Entertainment: Cartoon & Animations",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "In &quot;Avatar: The Last Airbender&quot; and &quot;The Legend of Korra&quot;, Lavabending is a specialized bending technique of Firebending.",
+      "correct_answer": "False",
+      "incorrect_answers": [
+        "True"
+      ]
+    }
+  ]
+}
