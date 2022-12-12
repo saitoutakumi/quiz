@@ -8,23 +8,46 @@
 // console.log("user1", user1);
 // console.log("user1", user1.age);
 
+const answer = document.getElementById("answer");
+
 fetch("https://opentdb.com/api.php?amount=10")
-  .then((res) => res.json())
-  .then((res) => console.log("res", res))
-  .then((res) => new Quiz(res.results))
+  .then((res) => {
+    return res.json();
+  })
+
+  .then((results) => {
+    ShowQuiz(results);
+  })
+
   .catch((error) => console.log(error));
 
 class Quiz {
-  constructor(quizdate) {
-    this.quizDate = quizdate;
-    this.category = quizdate.category;
-    this.type = quizdate.type;
-    this.difficulty = quizdate.difficulty;
-    this.question = quizdate.question;
-    this.correct_answer = quizdate.correct_answer;
-    this.incorrect_answers = quizdate.incorrect_answers;
+  // Quizというクラス
+  constructor(quizData) {
+    this.quizData = quizData;
   }
-  getCategory() {
-    return this.category;
+  getCategory(num) {
+    return this.quizData[num].category;
+  }
+  getType(num) {
+    return this.quizData[num].type;
   }
 }
+
+let num = 0;
+const ShowQuiz = (quizes) => {
+  answer.addEventListener("click", () => {
+    const quiz = quizes.results;
+    const quiz10 = new Quiz(quiz);
+    const category = quiz10.getCategory(num++);
+    const type = quiz10.getType(num++);
+    console.log(quiz10);
+    console.log("category:", category);
+    console.log("type:", type);
+    if (num > 10) {
+      console.log("finish!!");
+    } else {
+      ShowQuiz();
+    }
+  });
+};
