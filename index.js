@@ -36,18 +36,24 @@ class Quiz {
 
 let num = 0;
 const ShowQuiz = (quizes) => {
+  const quiz = quizes.results;
+  const quiz10 = new Quiz(quiz);
+  const category = quiz10.getCategory(num);
+  const type = quiz10.getType(num);
   answer.addEventListener("click", () => {
-    const quiz = quizes.results;
-    const quiz10 = new Quiz(quiz);
-    const category = quiz10.getCategory(num++);
-    const type = quiz10.getType(num++);
     console.log(quiz10);
-    console.log("category:", category);
-    console.log("type:", type);
-    if (num > 10) {
-      console.log("finish!!");
+    if (num < 10) {
+      num++;
+      console.log("category:", category);
+      console.log("type:", type);
+      console.log(num);
     } else {
-      ShowQuiz();
+      console.log("finish!!");
     }
   });
 };
+//numも１ずつ足されていく
+//表示される内容に変化はないがfinishは出る
+//試しにconst category = quiz10.getCategory(4);
+//などと記載しても５問目のクイズが表示される。
+//→任意のクイズナンバーを受け取っている
