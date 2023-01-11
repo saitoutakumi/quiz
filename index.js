@@ -44,6 +44,7 @@ const ShowQuiz = (quizes) => {
     console.log(quiz10);
     if (num < 10) {
       num++;
+      ShowQuiz(quizes);
       console.log("category:", category);
       console.log("type:", type);
       console.log(num);
@@ -52,8 +53,10 @@ const ShowQuiz = (quizes) => {
     }
   });
 };
-//numも１ずつ足されていく
-//表示される内容に変化はないがfinishは出る
+
+//なんかで一つずつクイズを表示させる必要がありそう？？
+
+//ワンクリックで複数クイズが表示されてしまう
 //試しにconst category = quiz10.getCategory(4);
 //などと記載しても５問目のクイズが表示される。
 //→任意のクイズナンバーを受け取っている
