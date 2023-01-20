@@ -61,6 +61,15 @@ fetch("https://opentdb.com/api.php?amount=10")
     });
   });
 
+// 不正解のボタンを生成する関数
+const i_button = document.getElementById("incorrect_answers1");
+const creatAnswersbutton = (incorrect_answers) => {
+  const i_button = document.createElement("button");
+  i_button.innerHTML = incorrect_answers;
+  i_button.style.backgroundColor = "lightgray";
+  div.appendChild(i_button);
+};
+
 const showQuiz = (
   category,
   type,
@@ -81,15 +90,9 @@ const showQuiz = (
   const quizQu = document.getElementById("question");
   quizQu.innerHTML = question;
 
-  const quizCo_a = document.getElementById("correct_answer");
-  quizCo_a.innerHTML = correct_answer;
-
-  incorrect_answers.forEach((incorrect_answers) => {
-    // const incorrect_answers = is;
-    const quizIn_a = document.getElementById("incorrect_answers");
-    quizIn_a.innerHTML = incorrect_answers;
-    console.log(incorrect_answers);
-  });
+  creatAnswersbutton(incorrect_answers);
+  // const quizCo_a = document.getElementById("correct_answer");
+  // quizCo_a.innerHTML = correct_answer;
 
   num++;
 
