@@ -25,7 +25,6 @@ class Quiz {
 }
 
 let num = 0;
-
 fetch("https://opentdb.com/api.php?amount=10")
   .then((res) => {
     return res.json();
@@ -40,6 +39,7 @@ fetch("https://opentdb.com/api.php?amount=10")
     const question = quiz.getQuestion(num);
     const correct_answer = quiz.getCorrect_answer(num);
     const incorrect_answers = quiz.getIncorrect_answers(num);
+
     // クリックされるたびに、showQuizを実行させて、クイズを一問ずつ表示する
     showQuiz(
       category,
@@ -56,18 +56,35 @@ fetch("https://opentdb.com/api.php?amount=10")
         quiz.getDifficulty(num),
         quiz.getQuestion(num),
         quiz.getCorrect_answer(num),
-        quiz.getIncorrect_answers(num)
+        quiz.getIncorrect_answers(num),
+        creatbutton(incorrect_answers, correct_answer)
       );
     });
   });
 
-// 不正解のボタンを生成する関数
-const i_button = document.getElementById("incorrect_answers1");
-const creatAnswersbutton = (incorrect_answers) => {
-  const i_button = document.createElement("button");
-  i_button.innerHTML = incorrect_answers;
-  i_button.style.backgroundColor = "lightgray";
-  div.appendChild(i_button);
+// ？？なぜ下記でダメだったのか(not defined）？？
+// const MakeChoices2 = (incorrect_answers, correct_answer) => {
+//   const choices2 = incorrect_answers.concat(correct_answer);
+//   console.log("練習", choices2);
+// };
+
+// 選択肢ボタンを生成する関数
+// ??生成したボタンの間を離すにはどうしたら？？
+// ??選択肢が変な出方する。（消えない）??
+// ???ではなぜ選択肢だけ残ってしまう？問題文等は毎回消える？？
+const creatbutton = (incorrect_answers, correct_answer) => {
+  const choices = incorrect_answers.concat(correct_answer);
+  console.log(choices);
+  choices.forEach((choice, index) => {
+    const Cho_button = document.createElement("div");
+    answer.appendChild(Cho_button);
+    const Cho_button2 = document.createElement("button");
+
+    Cho_button.appendChild(Cho_button2);
+    Cho_button2.innerHTML = choice;
+    console.log(index, choice);
+    Cho_button2.style.backgroundColor = "lightgray";
+  });
 };
 
 const showQuiz = (
@@ -76,7 +93,8 @@ const showQuiz = (
   difficulty,
   question,
   correct_answer,
-  incorrect_answers
+  incorrect_answers,
+  choices
 ) => {
   const quizNu = document.getElementById("num");
   quizNu.innerHTML = "問題" + [num + 1];
@@ -90,20 +108,18 @@ const showQuiz = (
   const quizQu = document.getElementById("question");
   quizQu.innerHTML = question;
 
-  creatAnswersbutton(incorrect_answers);
-  // const quizCo_a = document.getElementById("correct_answer");
-  // quizCo_a.innerHTML = correct_answer;
+  creatbutton(incorrect_answers, correct_answer, choices);
 
   num++;
 
-  // console.log("start showQuiz()");
-  // console.log(`${num + 1}問目のデータ`);
-  // console.log(category);
-  // console.log(type);
-  // console.log(diffculty);
-  // console.log(question);
-  // console.log(correct_answer);
-  // console.log(incorrect_answers);
+  //   console.log("start showQuiz()");
+  //   console.log(`${num + 1}問目のデータ`);
+  //   console.log(category);
+  //   console.log(type);
+  //   console.log(difficulty);
+  //   console.log(question);
+  //   console.log(correct_answer);
+  //   console.log(incorrect_answers);
 };
 
 // 「ようこそ」「ボタンをクリックしてください」
