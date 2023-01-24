@@ -50,15 +50,19 @@ fetch("https://opentdb.com/api.php?amount=10")
       incorrect_answers
     );
     answer.addEventListener("click", () => {
-      showQuiz(
-        quiz.getCategory(num),
-        quiz.getType(num),
-        quiz.getDifficulty(num),
-        quiz.getQuestion(num),
-        quiz.getCorrect_answer(num),
-        quiz.getIncorrect_answers(num),
-        creatbutton(incorrect_answers, correct_answer)
-      );
+      if (num < 10) {
+        showQuiz(
+          quiz.getCategory(num),
+          quiz.getType(num),
+          quiz.getDifficulty(num),
+          quiz.getQuestion(num),
+          quiz.getCorrect_answer(num),
+          quiz.getIncorrect_answers(num),
+          creatbutton(incorrect_answers, correct_answer)
+        );
+      } else {
+        console.log("お疲れ様でした");
+      }
     });
   });
 
@@ -73,17 +77,30 @@ fetch("https://opentdb.com/api.php?amount=10")
 // ??選択肢が変な出方する。（消えない）??
 // ???ではなぜ選択肢だけ残ってしまう？問題文等は毎回消える？？
 const creatbutton = (incorrect_answers, correct_answer) => {
+  answer.innerHTML = "";
   const choices = incorrect_answers.concat(correct_answer);
-  console.log(choices);
+  console.log("不正解", incorrect_answers);
+  console.log("正解", correct_answer);
   choices.forEach((choice, index) => {
     const Cho_button = document.createElement("div");
     answer.appendChild(Cho_button);
     const Cho_button2 = document.createElement("button");
-
     Cho_button.appendChild(Cho_button2);
     Cho_button2.innerHTML = choice;
+    choices.id = "allanswer";
+    console.log("id:", choices.id);
     console.log(index, choice);
     Cho_button2.style.backgroundColor = "lightgray";
+    // return choices;
+  });
+};
+
+// 正解をカウントする関数
+const countAnswer = () => {
+  const allanswer = document.getElementById("allanswer");
+  allanswer.addEventListener("click", () => {
+    // creatbutton();
+    console.log("押されました");
   });
 };
 
@@ -98,18 +115,13 @@ const showQuiz = (
 ) => {
   const quizNu = document.getElementById("num");
   quizNu.innerHTML = "問題" + [num + 1];
-
   const quizCa = document.getElementById("category");
   quizCa.innerHTML = "「ジャンル」" + category;
-
   const quizDi = document.getElementById("difficulty");
   quizDi.innerHTML = "「難易度」" + difficulty;
-
   const quizQu = document.getElementById("question");
   quizQu.innerHTML = question;
-
   creatbutton(incorrect_answers, correct_answer, choices);
-
   num++;
 
   //   console.log("start showQuiz()");
