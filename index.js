@@ -25,6 +25,8 @@ class Quiz {
 }
 
 let num = 0;
+let co_n = 0;
+
 fetch("https://opentdb.com/api.php?amount=10")
   .then((res) => {
     return res.json();
@@ -61,7 +63,7 @@ fetch("https://opentdb.com/api.php?amount=10")
           creatbutton(incorrect_answers, correct_answer)
         );
       } else {
-        console.log("お疲れ様でした");
+        console.log("正解数", co_n);
       }
     });
   });
@@ -71,36 +73,41 @@ fetch("https://opentdb.com/api.php?amount=10")
 //   const choices2 = incorrect_answers.concat(correct_answer);
 //   console.log("練習", choices2);
 // };
+// MakeChoices2(incorrect_answers, correct_answer);
 
 // 選択肢ボタンを生成する関数
 // ??生成したボタンの間を離すにはどうしたら？？
 // ??選択肢が変な出方する。（消えない）??
 // ???ではなぜ選択肢だけ残ってしまう？問題文等は毎回消える？？
+
+const shuffleArray = (incorrect_answers, correct_answer) => {
+  const choices = incorrect_answers.concat(correct_answer);
+  for (let i = choices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = choices[i];
+    choices[i] = choices[j];
+    choices[j] = temp;
+  }
+};
+
 const creatbutton = (incorrect_answers, correct_answer) => {
   answer.innerHTML = "";
   const choices = incorrect_answers.concat(correct_answer);
-  console.log("不正解", incorrect_answers);
-  console.log("正解", correct_answer);
+  shuffleArray(choices);
   choices.forEach((choice, index) => {
     const Cho_button = document.createElement("div");
     answer.appendChild(Cho_button);
     const Cho_button2 = document.createElement("button");
     Cho_button.appendChild(Cho_button2);
     Cho_button2.innerHTML = choice;
-    choices.id = "allanswer";
-    console.log("id:", choices.id);
-    console.log(index, choice);
+    // console.log(index, choice);
     Cho_button2.style.backgroundColor = "lightgray";
-    // return choices;
-  });
-};
-
-// 正解をカウントする関数
-const countAnswer = () => {
-  const allanswer = document.getElementById("allanswer");
-  allanswer.addEventListener("click", () => {
-    // creatbutton();
-    console.log("押されました");
+    Cho_button2.addEventListener("click", () => {
+      if (Cho_button2.innerHTML === correct_answer) {
+        co_n++;
+        console.log("正解数", co_n);
+      }
+    });
   });
 };
 
