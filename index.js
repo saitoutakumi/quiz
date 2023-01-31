@@ -1,5 +1,9 @@
+const topscreen = document.getElementById("topscreen");
+const topscreen2 = document.getElementById("topscreen2");
+const quizCa = document.getElementById("category");
+const quizDi = document.getElementById("difficulty");
+const quizQu = document.getElementById("question");
 const answer = document.getElementById("answer");
-const top = document.getElementById("top");
 
 class Quiz {
   constructor(quizData) {
@@ -25,12 +29,14 @@ class Quiz {
   }
 }
 
-const title = document.createElement("div");
-top.appendChild(title);
-title.innerHTML = "ようこそ";
-const s_button = document.createElement("button");
-top.appendChild(s_button);
-s_button.innerHTML = "スタート";
+topscreen.innerHTML = "ようこそ";
+topscreen2.innerHTML = "以下のボタンをクリック";
+const s_button = document.createElement("div");
+topscreen2.appendChild(s_button);
+const s_button2 = document.createElement("button");
+s_button.appendChild(s_button2);
+s_button2.innerHTML = "スタート";
+s_button2.style.backgroundColor = "lightgray";
 
 s_button.addEventListener("click", () => {
   let num = 0;
@@ -61,7 +67,7 @@ s_button.addEventListener("click", () => {
         incorrect_answers
       );
       answer.addEventListener("click", () => {
-        if (num < 10) {
+        if (num <= 10) {
           showQuiz(
             quiz.getCategory(num),
             quiz.getType(num),
@@ -72,7 +78,7 @@ s_button.addEventListener("click", () => {
             creatbutton(incorrect_answers, correct_answer)
           );
         } else {
-          console.log("正解数", co_n);
+          console.log("お疲れ様です", co_n);
         }
       });
     });
@@ -85,10 +91,12 @@ s_button.addEventListener("click", () => {
       const temp = choices[i];
       choices[i] = choices[j];
       choices[j] = temp;
+      console.log("シャッフル確認", temp);
     }
   };
 
   // 選択肢ボタンを表示する
+  topscreen2.innerHTML = "";
   const creatbutton = (incorrect_answers, correct_answer) => {
     answer.innerHTML = "";
     const choices = incorrect_answers.concat(correct_answer);
@@ -99,16 +107,27 @@ s_button.addEventListener("click", () => {
       const Cho_button2 = document.createElement("button");
       Cho_button.appendChild(Cho_button2);
       Cho_button2.innerHTML = choice;
-      // console.log(index, choice);
       Cho_button2.style.backgroundColor = "lightgray";
       Cho_button2.addEventListener("click", () => {
+        // 10問解答したらco_nのインクリメントを止める処理が必要？
+        console.log("シャッフル確認", choices);
         if (Cho_button2.innerHTML === correct_answer) {
           co_n++;
-          console.log("正解数", co_n);
         }
       });
     });
   };
+
+  // 完了画面を表示させる関数が必要？
+  // const creaetEndscreen = () => {
+  //   console.log("お疲れ様です。あなたの正解数は", co_n, "です！！");
+  //   topscreen.innerHTML = "あなたの正解数は" + co_n + "です！！";
+  //   topscreen2.innerHTML = "再度チャレンジしたい場合は以下をクリック";
+  //   category.innerHTML = "";
+  //   diffculty.innerHTML = "";
+  //   question.innerHTML = "";
+  //   answer.innerHTML = "";
+  // };
 
   const showQuiz = (
     category,
@@ -119,13 +138,9 @@ s_button.addEventListener("click", () => {
     incorrect_answers,
     choices
   ) => {
-    const quizNu = document.getElementById("top");
-    quizNu.innerHTML = "問題" + [num + 1];
-    const quizCa = document.getElementById("category");
+    topscreen.innerHTML = "問題" + [num + 1];
     quizCa.innerHTML = "「ジャンル」" + category;
-    const quizDi = document.getElementById("difficulty");
     quizDi.innerHTML = "「難易度」" + difficulty;
-    const quizQu = document.getElementById("question");
     quizQu.innerHTML = question;
     creatbutton(incorrect_answers, correct_answer, choices);
     num++;
