@@ -83,24 +83,17 @@ s_button.addEventListener("click", () => {
       });
     });
 
-  // 配列をランダムにする関数
-  const shuffleArray = (incorrect_answers, correct_answer) => {
+  // 選択肢ボタンを表示する
+  topscreen2.innerHTML = "";
+  const creatbutton = (incorrect_answers, correct_answer) => {
+    answer.innerHTML = "";
     const choices = incorrect_answers.concat(correct_answer);
     for (let i = choices.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = choices[i];
       choices[i] = choices[j];
       choices[j] = temp;
-      console.log("シャッフル確認", temp);
     }
-  };
-
-  // 選択肢ボタンを表示する
-  topscreen2.innerHTML = "";
-  const creatbutton = (incorrect_answers, correct_answer) => {
-    answer.innerHTML = "";
-    const choices = incorrect_answers.concat(correct_answer);
-    shuffleArray(choices);
     choices.forEach((choice, index) => {
       const Cho_button = document.createElement("div");
       answer.appendChild(Cho_button);
@@ -110,24 +103,14 @@ s_button.addEventListener("click", () => {
       Cho_button2.style.backgroundColor = "lightgray";
       Cho_button2.addEventListener("click", () => {
         // 10問解答したらco_nのインクリメントを止める処理が必要？
-        console.log("シャッフル確認", choices);
+        // console.log("シャッフル確認", choices);
         if (Cho_button2.innerHTML === correct_answer) {
+          console.log("正解数", co_n + 1);
           co_n++;
         }
       });
     });
   };
-
-  // 完了画面を表示させる関数が必要？
-  // const creaetEndscreen = () => {
-  //   console.log("お疲れ様です。あなたの正解数は", co_n, "です！！");
-  //   topscreen.innerHTML = "あなたの正解数は" + co_n + "です！！";
-  //   topscreen2.innerHTML = "再度チャレンジしたい場合は以下をクリック";
-  //   category.innerHTML = "";
-  //   diffculty.innerHTML = "";
-  //   question.innerHTML = "";
-  //   answer.innerHTML = "";
-  // };
 
   const showQuiz = (
     category,
@@ -144,6 +127,17 @@ s_button.addEventListener("click", () => {
     quizQu.innerHTML = question;
     creatbutton(incorrect_answers, correct_answer, choices);
     num++;
+  };
+
+  // 完了画面を表示させる関数が必要？
+  const creaetEndscreen = () => {
+    console.log("お疲れ様です。あなたの正解数は", co_n, "です！！");
+    topscreen.innerHTML = "あなたの正解数は" + co_n + "です！！";
+    topscreen2.innerHTML = "再度チャレンジしたい場合は以下をクリック";
+    category.innerHTML = "";
+    diffculty.innerHTML = "";
+    question.innerHTML = "";
+    answer.innerHTML = "";
   };
 });
 
