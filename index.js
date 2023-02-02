@@ -29,16 +29,19 @@ class Quiz {
   }
 }
 
-topscreen.innerHTML = "ようこそ";
-topscreen2.innerHTML = "以下のボタンをクリック";
-const s_button = document.createElement("div");
-topscreen2.appendChild(s_button);
-const s_button2 = document.createElement("button");
-s_button.appendChild(s_button2);
-s_button2.innerHTML = "スタート";
-s_button2.style.backgroundColor = "lightgray";
+const start = () => {
+  topscreen.innerHTML = "ようこそ";
+  topscreen2.innerHTML = "以下のボタンをクリック";
+  const s_button = document.createElement("div");
+  topscreen2.appendChild(s_button);
+  const s_button2 = document.createElement("button");
+  s_button.appendChild(s_button2);
+  s_button2.innerHTML = "スタート";
+  s_button2.style.backgroundColor = "lightgray";
+  return s_button2;
+};
 
-s_button.addEventListener("click", () => {
+start().addEventListener("click", () => {
   let num = 0;
   let co_n = 0;
 
@@ -67,7 +70,7 @@ s_button.addEventListener("click", () => {
         incorrect_answers
       );
       answer.addEventListener("click", () => {
-        if (num <= 10) {
+        if (num < 10) {
           showQuiz(
             quiz.getCategory(num),
             quiz.getType(num),
@@ -78,15 +81,13 @@ s_button.addEventListener("click", () => {
             creatbutton(incorrect_answers, correct_answer)
           );
         } else {
+          creaetEndscreen();
           console.log("お疲れ様です", co_n);
         }
       });
     });
 
-  // 選択肢ボタンを表示する
-  topscreen2.innerHTML = "";
-  const creatbutton = (incorrect_answers, correct_answer) => {
-    answer.innerHTML = "";
+  const shuffleArray = (incorrect_answers, correct_answer) => {
     const choices = incorrect_answers.concat(correct_answer);
     for (let i = choices.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -94,7 +95,23 @@ s_button.addEventListener("click", () => {
       choices[i] = choices[j];
       choices[j] = temp;
     }
-    choices.forEach((choice, index) => {
+    // 関数shuffleArrayが実行されると、
+    // 上記のシャッフル過程を経て配列がシャッフルされた「choices」を返す。
+    return choices;
+  };
+
+  // 選択肢ボタンを表示する
+  topscreen2.innerHTML = "";
+  const creatbutton = (incorrect_answers, correct_answer) => {
+    answer.innerHTML = "";
+    const choices = shuffleArray(incorrect_answers, correct_answer);
+    for (let i = choices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = choices[i];
+      choices[i] = choices[j];
+      choices[j] = temp;
+    }
+    choices.forEach((choice, num) => {
       const Cho_button = document.createElement("div");
       answer.appendChild(Cho_button);
       const Cho_button2 = document.createElement("button");
@@ -103,10 +120,9 @@ s_button.addEventListener("click", () => {
       Cho_button2.style.backgroundColor = "lightgray";
       Cho_button2.addEventListener("click", () => {
         // 10問解答したらco_nのインクリメントを止める処理が必要？
-        // console.log("シャッフル確認", choices);
         if (Cho_button2.innerHTML === correct_answer) {
-          console.log("正解数", co_n + 1);
           co_n++;
+          console.log("正解数", co_n);
         }
       });
     });
@@ -129,15 +145,29 @@ s_button.addEventListener("click", () => {
     num++;
   };
 
-  // 完了画面を表示させる関数が必要？
+  // 完了ボタンを表示する関数
+  const creaetFbutton = () => {
+    const f_button = document.createElement("div");
+    topscreen2.appendChild(f_button);
+    const f_button2 = document.createElement("button");
+    f_button.appendChild(f_button2);
+    f_button2.innerHTML = "ホームに戻る";
+    f_button2.style.backgroundColor = "lightgray";
+    return f_button2;
+  };
+
+  // 完了画面を表示させる関数
   const creaetEndscreen = () => {
     console.log("お疲れ様です。あなたの正解数は", co_n, "です！！");
     topscreen.innerHTML = "あなたの正解数は" + co_n + "です！！";
     topscreen2.innerHTML = "再度チャレンジしたい場合は以下をクリック";
     category.innerHTML = "";
-    diffculty.innerHTML = "";
+    difficulty.innerHTML = "";
     question.innerHTML = "";
     answer.innerHTML = "";
+    creaetFbutton().addEventListener("click", () => {
+      location.reload();
+    });
   };
 });
 
