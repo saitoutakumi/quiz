@@ -93,7 +93,6 @@ start().addEventListener("click", () => {
           );
         } else {
           creaetEndscreen();
-          console.log("お疲れ様です", co_n);
         }
       });
     });
@@ -151,6 +150,7 @@ start().addEventListener("click", () => {
     incorrect_answers,
     choices
   ) => {
+    console.log("この問題の正解", correct_answer);
     topscreen.innerHTML = "問題" + [num + 1];
     quizCa.innerHTML = "「ジャンル」" + category;
     quizDi.innerHTML = "「難易度」" + difficulty;
@@ -175,7 +175,6 @@ start().addEventListener("click", () => {
 
   // 完了画面を表示させる関数
   const creaetEndscreen = () => {
-    console.log("お疲れ様です。あなたの正解数は", co_n, "です！！");
     topscreen.innerHTML = "あなたの正解数は" + co_n + "です！！";
     quizQu.innerHTML = "再度チャレンジしたい場合は以下をクリック";
     category.innerHTML = "";
