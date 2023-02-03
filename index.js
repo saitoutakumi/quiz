@@ -31,13 +31,17 @@ class Quiz {
 
 const start = () => {
   topscreen.innerHTML = "ようこそ";
-  topscreen2.innerHTML = "以下のボタンをクリック";
+  // topscreen2.innerHTML = "以下のボタンをクリック";
+  quizQu.innerHTML = "以下のボタンをクリック";
   const s_button = document.createElement("div");
-  topscreen2.appendChild(s_button);
+  answer.appendChild(s_button);
   const s_button2 = document.createElement("button");
   s_button.appendChild(s_button2);
   s_button2.innerHTML = "スタート";
   s_button2.style.backgroundColor = "lightgray";
+  s_button2.style.margin = "20px 0px";
+  s_button2.style.padding = "4px 4px";
+
   return s_button2;
 };
 
@@ -45,11 +49,18 @@ start().addEventListener("click", () => {
   let num = 0;
   let co_n = 0;
 
+  topscreen.innerHTML = "取得中";
+  quizQu.innerHTML = "少々お待ちください";
+  answer.innerHTML = "";
+  // console.log(topscreen);
+  // console.log(topscreen2);
+
   fetch("https://opentdb.com/api.php?amount=10")
     .then((res) => {
       return res.json();
     })
     .then((res) => {
+      answer.innerHTML = "";
       console.log(res);
       // 10問分で初期化
       const quiz = new Quiz(res.results);
@@ -101,7 +112,7 @@ start().addEventListener("click", () => {
   };
 
   // 選択肢ボタンを表示する
-  topscreen2.innerHTML = "";
+  // topscreen2.innerHTML = "";
   const creatbutton = (incorrect_answers, correct_answer) => {
     answer.innerHTML = "";
     const choices = shuffleArray(incorrect_answers, correct_answer);
@@ -118,8 +129,11 @@ start().addEventListener("click", () => {
       Cho_button.appendChild(Cho_button2);
       Cho_button2.innerHTML = choice;
       Cho_button2.style.backgroundColor = "lightgray";
+      answer.style.margin = "10px 0px 2px 0px";
+      Cho_button2.style.margin = "2px 0px 2px 0px";
+      Cho_button2.style.padding = "4px 4px";
+
       Cho_button2.addEventListener("click", () => {
-        // 10問解答したらco_nのインクリメントを止める処理が必要？
         if (Cho_button2.innerHTML === correct_answer) {
           co_n++;
           console.log("正解数", co_n);
@@ -148,11 +162,14 @@ start().addEventListener("click", () => {
   // 完了ボタンを表示する関数
   const creaetFbutton = () => {
     const f_button = document.createElement("div");
-    topscreen2.appendChild(f_button);
+    answer.appendChild(f_button);
     const f_button2 = document.createElement("button");
     f_button.appendChild(f_button2);
     f_button2.innerHTML = "ホームに戻る";
     f_button2.style.backgroundColor = "lightgray";
+    f_button2.style.margin = "10px 0px";
+    f_button2.style.padding = "4px 4px";
+
     return f_button2;
   };
 
@@ -160,12 +177,12 @@ start().addEventListener("click", () => {
   const creaetEndscreen = () => {
     console.log("お疲れ様です。あなたの正解数は", co_n, "です！！");
     topscreen.innerHTML = "あなたの正解数は" + co_n + "です！！";
-    topscreen2.innerHTML = "再度チャレンジしたい場合は以下をクリック";
+    quizQu.innerHTML = "再度チャレンジしたい場合は以下をクリック";
     category.innerHTML = "";
     difficulty.innerHTML = "";
-    question.innerHTML = "";
     answer.innerHTML = "";
     creaetFbutton().addEventListener("click", () => {
+      // 実行すると画面をリロード
       location.reload();
     });
   };
