@@ -1,4 +1,5 @@
 const topscreen = document.getElementById("topscreen");
+// ！！下記使ってない
 const topscreen2 = document.getElementById("topscreen2");
 const quizCa = document.getElementById("category");
 const quizDi = document.getElementById("difficulty");
@@ -31,7 +32,6 @@ class Quiz {
 
 const start = () => {
   topscreen.innerHTML = "ようこそ";
-  // topscreen2.innerHTML = "以下のボタンをクリック";
   quizQu.innerHTML = "以下のボタンをクリック";
   const s_button = document.createElement("div");
   answer.appendChild(s_button);
@@ -97,6 +97,8 @@ start().addEventListener("click", () => {
       });
     });
 
+  // 正解・不正解の配列を合体させた配列を生成
+  // その配列の中身をランダムにミックスする
   const shuffleArray = (incorrect_answers, correct_answer) => {
     const choices = incorrect_answers.concat(correct_answer);
     for (let i = choices.length - 1; i > 0; i--) {
@@ -110,18 +112,13 @@ start().addEventListener("click", () => {
     return choices;
   };
 
-  // 選択肢ボタンを表示する
-  // topscreen2.innerHTML = "";
+  // 選択肢ボタンを表示する関数
+  // 材料はincorrect_answers, correct_answer
   const creatbutton = (incorrect_answers, correct_answer) => {
     answer.innerHTML = "";
     const choices = shuffleArray(incorrect_answers, correct_answer);
-    for (let i = choices.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = choices[i];
-      choices[i] = choices[j];
-      choices[j] = temp;
-    }
-    choices.forEach((choice, num) => {
+
+    choices.forEach((choice, index) => {
       const Cho_button = document.createElement("div");
       answer.appendChild(Cho_button);
       const Cho_button2 = document.createElement("button");
@@ -131,7 +128,6 @@ start().addEventListener("click", () => {
       answer.style.margin = "10px 0px 2px 0px";
       Cho_button2.style.margin = "2px 0px 2px 0px";
       Cho_button2.style.padding = "4px 4px";
-
       Cho_button2.addEventListener("click", () => {
         if (Cho_button2.innerHTML === correct_answer) {
           co_n++;
